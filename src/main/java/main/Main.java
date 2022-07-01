@@ -21,7 +21,11 @@ public class Main {
 
     }
 
-    private static void createPatientsList(Scanner scanner, Hospital hospital) {        //loop for user defined number of patients and stores them in the doctors patient lists
+    // loop for user defined number of
+    // patients and stores them in the
+    // doctors patient lists
+    private static void createPatientsList(Scanner scanner, Hospital hospital) {
+
         int numPatients;
         System.out.println("How many patients are at your hospital?");
         String sampleString = scanner.nextLine();
@@ -43,7 +47,11 @@ public class Main {
         }
     }
 
-    private static void createDoctorsList(Scanner scanner, Hospital hospital) {        //loop for user defined number of doctors and stores them in the hospital
+    // loop for user defined number of
+    // doctors and stores them in the
+    // hospital
+    private static void createDoctorsList(Scanner scanner, Hospital hospital) {
+
         int numDoctors;
         System.out.println("How many doctors work at your hospital?");
         String sampleString = scanner.nextLine();
@@ -65,7 +73,7 @@ public class Main {
 
     }
 
-    private static String getDoctorName(Scanner scanner) {      
+    private static String getDoctorName(Scanner scanner) {
         String doctorName = "";
         System.out.println("Enter the doctors name:");
         if (scanner.hasNext()) {
@@ -90,7 +98,9 @@ public class Main {
         return patientName;
     }
 
-    private static String getSpecialty(Scanner scanner) {   //get doctor specialty or specialty needed by patient
+    // get doctor specialty or specialty needed by patient
+    private static String getSpecialty(Scanner scanner) {
+
         String specialty = "";
         System.out.println("Pick a specialty:");
         String[] specialties = new String[] { "1. Family Medicine", "2. Internal Medicine", "3. Dermatology",
@@ -123,7 +133,8 @@ public class Main {
         return specialty;
     }
 
-    private static int getInput(String sampleString) {      //get input as integer return -1 if invalid
+    // get input as integer return -1 if invalid
+    private static int getInput(String sampleString) {
         try {
             return Integer.parseInt(sampleString);
         } catch (Exception e) {
