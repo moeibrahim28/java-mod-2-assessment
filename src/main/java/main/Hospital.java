@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 public class Hospital {
     private Map<String, List<Doctor>> specialtyToDoctors;
@@ -29,8 +30,6 @@ public class Hospital {
 
     }
 
-   
-
     @Override
     public String toString() {
         return "Hospital [name=" + name + ", specialtyToDoctors=" + specialtyToDoctors + "]";
@@ -43,7 +42,12 @@ public class Hospital {
             System.out.println("The following doctors have that specialty:");
             List<Doctor> doctorList = specialtyToDoctors.get(specialty);
             System.out.println(doctorList);
-            Doctor doctor = doctorList.get(0); // change method of adding patient to doctor
+
+            // randomly assign to any doctor with that specialty
+            int doctorListSize = doctorList.size();
+            Random random = new Random(doctorListSize + 1);
+            int randomIndex = random.nextInt(doctorListSize + 1);
+            Doctor doctor = doctorList.get(randomIndex); //
             doctor.addPatient(patient);
 
         }
