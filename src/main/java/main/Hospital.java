@@ -32,7 +32,7 @@ public class Hospital {
 
     @Override
     public String toString() {
-        return "Hospital [name=" + name + ", specialtyToDoctors=" + specialtyToDoctors + "]";
+        return "\n\nThis is our Hospital [name=" + name + ", specialtyToDoctors=" + specialtyToDoctors + "]";
     }
 
     public void assignPatientToDoctor(Patient patient, String specialty) { // assign patient to first doctor in listr of
@@ -45,9 +45,12 @@ public class Hospital {
 
             // randomly assign to any doctor with that specialty
             int doctorListSize = doctorList.size();
-            Random random = new Random(doctorListSize + 1);
-            int randomIndex = random.nextInt(doctorListSize + 1);
-            Doctor doctor = doctorList.get(randomIndex); //
+            int doctorIndex = 0;
+            if (doctorListSize >= 1) {
+                Random random = new Random();
+                doctorIndex = random.nextInt(doctorListSize);
+            }
+            Doctor doctor = doctorList.get(doctorIndex); //
             doctor.addPatient(patient);
 
         }
