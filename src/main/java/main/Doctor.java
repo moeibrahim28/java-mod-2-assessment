@@ -1,3 +1,5 @@
+package main;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,13 +8,13 @@ public class Doctor {
     private String specialty;
     private List<Patient> patientsList;
 
-    public Doctor(){
-        this.name=name;
-        this.specialty=specialty;
-        this.patientsList=new ArrayList<>();
+    public Doctor(String name, String specialty) {
+        this.name = name;
+        this.specialty = specialty;
+        this.patientsList = new ArrayList<>();
     }
 
-    public void addPatient(Patient patient){
+    public void addPatient(Patient patient) {
         patientsList.add(patient);
     }
 
@@ -45,8 +47,4 @@ public class Doctor {
         return "Doctor [name=" + name + ", patientsList=" + patientsList + ", specialty=" + specialty + "]";
     }
 
-    
-
-    
-    
 }
