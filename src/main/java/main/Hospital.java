@@ -1,13 +1,12 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.Random;
+import java.util.Set;
 
 public class Hospital {
-    private Map<String, List<Doctor>> specialtyToDoctors;
+    private Map<String, Set<Doctor>> specialtyToDoctors;
     private String name;
 
     public Hospital(String name) {
@@ -19,10 +18,10 @@ public class Hospital {
                                            // with that specialty
         // if specialty of this doctor exists then add the doctor to that list
         if (specialtyToDoctors.containsKey(doctor.getSpecialty())) {
-            List<Doctor> withSpecialty = specialtyToDoctors.get(doctor.getSpecialty());
+            Set<Doctor> withSpecialty = specialtyToDoctors.get(doctor.getSpecialty());
             withSpecialty.add(doctor);
         } else { // specialty doesnt exist diddo
-            List<Doctor> doctorsListForSpecialtyMap = new ArrayList<>();
+            Set<Doctor> doctorsListForSpecialtyMap = new HashSet<>();
             doctorsListForSpecialtyMap.add(doctor);
             // adding new specialty to map
             specialtyToDoctors.put(doctor.getSpecialty(), doctorsListForSpecialtyMap);
@@ -35,30 +34,31 @@ public class Hospital {
         return "\n\nThis is our Hospital [name=" + name + ", specialtyToDoctors=" + specialtyToDoctors + "]";
     }
 
-    public void assignPatientToDoctor(Patient patient, String specialty) { // assign patient to first doctor in listr of
-                                                                           // doctors
+    public void assignPatientToDoctor(Patient patient, String specialty) { 
+        // assign patient to first doctor in list of doctors
         boolean doctorWithSpecialtyFound = this.specialtyToDoctors.containsKey(specialty);
         if (doctorWithSpecialtyFound) {
-            System.out.println("The following doctors have that specialty:");
-            List<Doctor> doctorList = specialtyToDoctors.get(specialty);
-            System.out.println(doctorList);
-
-            // randomly assign to any doctor with that specialty
-            int doctorListSize = doctorList.size();
-            int doctorIndex = 0;
-            if (doctorListSize >= 1) {
-                Random random = new Random();
-                doctorIndex = random.nextInt(doctorListSize);
-            }
-            Doctor doctor = doctorList.get(doctorIndex); //
-            doctor.addPatient(patient);
-
+            Set<Doctor> doctorsWithThatSpecialty = specialtyToDoctors.get(patient.getSpecialtyNeeded());
+            Doctor chosenDoctor = findDoctorWithShortestQueue(doctorsWithThatSpecialty);
+            chosenDoctor.addPatient(patient);
         }
 
         else {
             System.out.println("No doctors at this hospital have that specialty");
         }
 
+    }
+
+    private Doctor findDoctorWithShortestQueue(Set<Doctor> doctors) {
+        Doctor chosenDoctor = null;
+        for (Doctor doctor : doctors) {
+            if (chosenDoctor == null) {
+                chosenDoctor = doctor;
+            } else if (chosenDoctor.getPatientCount() > doctor.getPatientCount()) {
+                chosenDoctor = doctor;
+            }
+        }
+        return chosenDoctor;
     }
 
 }
