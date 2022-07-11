@@ -30,13 +30,13 @@ public class Doctor {
         return patientsQueue;
     }
 
-    public int getPatientCount(){
+    public int getPatientCount() {
         return this.patientsQueue.size();
     }
 
     @Override
     public String toString() {
-        return "Doctor [name=" + name + ", patientsQueue=" + patientsQueue + ", specialty=" + specialty + "]";
+        return "Dr. " + name + " specialty=" + specialty + ". They have the following patients: " + patientsQueue;
     }
 
 }

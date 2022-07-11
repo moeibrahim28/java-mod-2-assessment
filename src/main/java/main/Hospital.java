@@ -29,14 +29,9 @@ public class Hospital {
 
     }
 
-    @Override
-    public String toString() {
-        return "\n\nThis is our Hospital [name=" + name + ", specialtyToDoctors=" + specialtyToDoctors + "]";
-    }
-
-    public void assignPatientToDoctor(Patient patient, String specialty) { 
+    public void addPatient(Patient patient) {
         // assign patient to first doctor in list of doctors
-        boolean doctorWithSpecialtyFound = this.specialtyToDoctors.containsKey(specialty);
+        boolean doctorWithSpecialtyFound = this.specialtyToDoctors.containsKey(patient.getSpecialtyNeeded());
         if (doctorWithSpecialtyFound) {
             Set<Doctor> doctorsWithThatSpecialty = specialtyToDoctors.get(patient.getSpecialtyNeeded());
             Doctor chosenDoctor = findDoctorWithShortestQueue(doctorsWithThatSpecialty);
@@ -59,6 +54,11 @@ public class Hospital {
             }
         }
         return chosenDoctor;
+    }
+
+    @Override
+    public String toString() {
+        return "\nThis is " + name + " hospital: " + ", Specialties=" + specialtyToDoctors + "]";
     }
 
 }
