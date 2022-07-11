@@ -4,20 +4,19 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Welcome to our Hospital! Enter the Hospital name:");
 
-        String hospitalName = scanner.nextLine();
-        boolean runValue = true;
-        while (runValue) {
-
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.println("Welcome to our Hospital! Enter the Hospital name:");
+            String hospitalName = scanner.nextLine();
+            while (hospitalName.isBlank()) {
+                System.out.println("Please enter a non-empty name for the hospital:");
+                hospitalName = scanner.nextLine();
+            }
             Hospital hospital = new Hospital(hospitalName);
             createDoctorsList(scanner, hospital);
             createPatientsList(scanner, hospital);
 
             System.out.println(hospital);
-            runValue = false;
-            scanner.close();
         }
 
     }
@@ -77,11 +76,10 @@ public class Main {
     private static String getDoctorName(Scanner scanner) {
         String doctorName = "";
         System.out.println("Enter the doctors name:");
-        if (scanner.hasNext()) {
+        doctorName = scanner.nextLine();
+        while (doctorName.isBlank()) {
+            System.out.println("Please enter a non-empty name for the doctor:");
             doctorName = scanner.nextLine();
-        } else {
-            doctorName = getDoctorName(scanner);
-
         }
 
         return doctorName;
@@ -90,12 +88,11 @@ public class Main {
     private static String getPatientName(Scanner scanner) {
         String patientName = "";
         System.out.println("Enter the patient name:");
-        if (scanner.hasNext()) {
+        patientName = scanner.nextLine();
+        while (patientName.isBlank()) {
+            System.out.println("Please enter a non-empty name for the patient:");
             patientName = scanner.nextLine();
-        } else {
-            patientName = getPatientName(scanner);
         }
-
         return patientName;
     }
 
@@ -126,7 +123,7 @@ public class Main {
                 break;
 
             default:
-                System.out.println("Pick a specialty out of the following please.");
+                System.out.println("Invalid input. Pick a specialty out of the following please.");
                 specialty = getSpecialty(scanner);
 
         }
